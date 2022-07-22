@@ -1,74 +1,175 @@
 <?php
 
-include( 'admin/includes/database.php' );
-include( 'admin/includes/config.php' );
-include( 'admin/includes/functions.php' );
+include('admin/includes/database.php');
+include('admin/includes/config.php');
+include('admin/includes/functions.php');
+
+include('main_header.php')
 
 ?>
-<!doctype html>
-<html>
-<head>
-  
-  <meta charset="UTF-8">
-  <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website Admin</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  
-  <link href="css/reset.css" type="text/css" rel="stylesheet">
-  <link href="css/main.css" type="text/css" rel="stylesheet">
-  
-  <script src="https://cdn.ckeditor.com/ckeditor5/12.4.0/classic/ckeditor.js"></script>
-  
-</head>
-<body>
 
-  <h1>Welcome to My Website!</h1>
-  <p>This is the website frontend, enjoy!</p>
+
+<main class="main">
+
+  <h2 class="title">Xuanwen Zheng's Portfolio</h2>
 
   <?php
 
-  $query = 'SELECT *
-    FROM projects
-    ORDER BY date DESC';
-  $result = mysqli_query( $connect, $query );
+  $contentquery = 'SELECT *
+    FROM contents
+    ORDER BY title DESC';
+  $content = mysqli_query($connect, $contentquery);
 
   ?>
 
-  <p>There are <?php echo mysqli_num_rows($result); ?> projects in the database!</p>
+  <h3 class="hidden">Contents</h3>
 
-  <hr>
+  <div class="objects-container">
+    <?php while ($contentrecord = mysqli_fetch_assoc($content)) : ?>
 
-  <?php while($record = mysqli_fetch_assoc($result)): ?>
+      <div class="object-item">
 
-    <div>
+        <?php if ($contentrecord['photo']) : ?>
 
-      <h2><?php echo $record['title']; ?></h2>
-      <?php echo $record['content']; ?>
+          <img src="admin/image.php?type=content&id=<?php echo $contentrecord['id']; ?>&width=350&height=250">
 
-      <?php if($record['photo']): ?>
+        <?php endif; ?>
 
-        <p>The image can be inserted using a base64 image:</p>
+        <h4 class="object-title"><?php echo $contentrecord['title']; ?></h4>
 
-        <img src="<?php echo $record['photo']; ?>">
+        <div class="object-content">
+          <?php echo $contentrecord['content']; ?>
+        </div>
 
-        <p>Or by streaming the image through the image.php file:</p>
+      </div>
 
-        <img src="admin/image.php?type=project&id=<?php echo $record['id']; ?>&width=100&height=100">
+    <?php endwhile; ?>
 
-      <?php else: ?>
+  </div>
 
-        <p>This record does not have an image!</p>
+  <h3 class="secondary-title">Skills</h3>
 
-      <?php endif; ?>
+  <?php
 
-    </div>
+  $skillquery = 'SELECT *
+    FROM skills
+    ORDER BY id DESC';
+  $skill = mysqli_query($connect, $skillquery);
 
-    <hr>
+  ?>
 
-  <?php endwhile; ?>
+  <div class="skills-container">
+    <?php while ($skillrecord = mysqli_fetch_assoc($skill)) : ?>
 
-</body>
-</html>
+      <div class="skill-item">
+
+        <?php if ($skillrecord['photo']) : ?>
+
+          <img src="admin/image.php?type=skill&id=<?php echo $skillrecord['id']; ?>&width=150&height=150">
+
+        <?php endif; ?>
+
+        <h4 class="skill-title"><?php echo $skillrecord['title']; ?></h4>
+
+
+      </div>
+
+    <?php endwhile; ?>
+
+  </div>
+
+
+  <h3 class="secondary-title">Educations</h3>
+
+  <?php
+
+  $educationquery = 'SELECT *
+    FROM educations
+    ORDER BY id DESC';
+  $education = mysqli_query($connect, $educationquery);
+
+  ?>
+
+  <div class="objects-container">
+    <?php while ($educationrecord = mysqli_fetch_assoc($education)) : ?>
+
+      <div class="object-item">
+
+        <?php if ($educationrecord['photo']) : ?>
+
+          <img src="admin/image.php?type=education&id=<?php echo $educationrecord['id']; ?>&width=390&height=250">
+
+        <?php endif; ?>
+
+        <h4 class="object-title"><?php echo $educationrecord['school']; ?></h4>
+
+        <h5 class="object-subtitle"><?php echo $educationrecord['degree']; ?> in <?php echo $educationrecord['major']; ?></h5>
+
+        <div class="object-date-container">
+          <div class="object-date">
+            <?php echo $educationrecord['start_date']; ?>
+          </div>
+          <div class="object-date">
+            <?php echo $educationrecord['end_date']; ?>
+          </div>
+        </div>
+
+      </div>
+
+    <?php endwhile; ?>
+
+  </div>
+
+
+  <h3 class="secondary-title">Work Experience</h3>
+
+  <?php
+
+  $workquery = 'SELECT *
+    FROM works
+    ORDER BY id DESC';
+  $work = mysqli_query($connect, $workquery);
+
+  ?>
+
+  <div class="objects-container">
+    <?php while ($workrecord = mysqli_fetch_assoc($work)) : ?>
+
+      <div class="object-item">
+
+        <?php if ($workrecord['photo']) : ?>
+
+          <img src="admin/image.php?type=work&id=<?php echo $workrecord['id']; ?>&width=350&height=250">
+
+        <?php endif; ?>
+
+        <h4 class="object-title"><?php echo $workrecord['title']; ?></h4>
+
+        <h5 class="object-subtitle"><?php echo $workrecord['company_name']; ?> in <?php echo $workrecord['location']; ?></h5>
+
+        <div class="object-date-container">
+          <div class="object-date">
+            <?php echo $workrecord['start_date']; ?>
+          </div>
+          <div class="object-date">
+            <?php echo $workrecord['end_date']; ?>
+          </div>
+        </div>
+
+        <div class="object-content">
+          <?php echo $workrecord['description']; ?>
+        </div>
+      </div>
+
+    <?php endwhile; ?>
+
+  </div>
+
+
+</main>
+
+<?php
+
+include('main_footer.php')
+
+?>
