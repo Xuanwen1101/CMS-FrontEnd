@@ -30,7 +30,7 @@ include('main_header.php')
 
         <?php if ($record['photo']) : ?>
 
-          <img src="admin/image.php?type=blog&id=<?php echo $record['id']; ?>&width=350&height=250">
+          <img src="admin/image.php?type=blog&id=<?php echo $record['id']; ?>&width=350&height=250" alt="Image for the blog <?php echo $record['title']?>">
 
         <?php endif; ?>
 

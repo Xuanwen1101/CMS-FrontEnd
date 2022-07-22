@@ -40,13 +40,13 @@ $result = mysqli_query($connect, $query);
 
       <?php if ($record['id']) : ?>
 
-        <img src="image.php?type=project&id=<?php echo $record['id']; ?>&width=250&height=250">
+        <img src="image.php?type=project&id=<?php echo $record['id']; ?>&width=250&height=250" alt="Image for the Project <?php echo $record['title']?>">
 
       <?php endif; ?>
 
       <?php if ($record['title']) : ?>
 
-        <h2 class="object-title"><?= $record['title'] ?></h2>
+        <h3 class="object-title"><?= $record['title'] ?></h3>
 
       <?php endif; ?>
 

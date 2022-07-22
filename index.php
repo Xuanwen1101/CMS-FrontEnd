@@ -31,7 +31,7 @@ include('main_header.php')
 
         <?php if ($contentrecord['photo']) : ?>
 
-          <img src="admin/image.php?type=content&id=<?php echo $contentrecord['id']; ?>&width=350&height=250">
+          <img src="admin/image.php?type=content&id=<?php echo $contentrecord['id']; ?>&width=350&height=250" alt="Image for the content <?php echo $record['title']?>">
 
         <?php endif; ?>
 
@@ -65,7 +65,7 @@ include('main_header.php')
 
         <?php if ($skillrecord['photo']) : ?>
 
-          <img src="admin/image.php?type=skill&id=<?php echo $skillrecord['id']; ?>&width=150&height=150">
+          <img src="admin/image.php?type=skill&id=<?php echo $skillrecord['id']; ?>&width=150&height=150" alt="Image for the skill <?php echo $record['title']?>">
 
         <?php endif; ?>
 
@@ -97,7 +97,7 @@ include('main_header.php')
 
         <?php if ($educationrecord['photo']) : ?>
 
-          <img src="admin/image.php?type=education&id=<?php echo $educationrecord['id']; ?>&width=390&height=250">
+          <img src="admin/image.php?type=education&id=<?php echo $educationrecord['id']; ?>&width=390&height=250" alt="Image for the education <?php echo $record['title']?>">
 
         <?php endif; ?>
 
@@ -139,7 +139,7 @@ include('main_header.php')
 
         <?php if ($workrecord['photo']) : ?>
 
-          <img src="admin/image.php?type=work&id=<?php echo $workrecord['id']; ?>&width=350&height=250">
+          <img src="admin/image.php?type=work&id=<?php echo $workrecord['id']; ?>&width=350&height=250" alt="Image for the work <?php echo $record['title']?>">
 
         <?php endif; ?>
 
